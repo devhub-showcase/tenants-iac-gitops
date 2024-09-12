@@ -12,11 +12,13 @@ spec:
   project: default
   source:
     path: .
-    repoURL: "https://github.com/Vikaspogu/openshift-multicluster.git"
+    repoURL: "https://github.com/Vikaspogu/tenants-iac-gitops.git"
     targetRevision: main
     plugin:
       name: helm-multivalues-plugin
       env:
+        - name: CHART_REPO_URL
+          value: https://github.com/devhub-showcase/shared-helm-charts.git
         - name: CHART_PATH
           value: helm/charts/project-onboarding
         - name: VALUES_FOLDER
