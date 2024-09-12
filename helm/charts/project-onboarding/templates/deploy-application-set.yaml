@@ -28,7 +28,7 @@ spec:
     spec:
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: '{{ $values.namespace | splitList "-" | first }}-{{`{{ .path.filename | splitList "-" | first }}` }}'
+        namespace: '{{ trimSuffix "-gitops" $values.namespace }}-{{`{{ .path.filename | splitList "-" | first }}` }}'
       project: {{ $key }}
       sources:
         - helm:
