@@ -1,0 +1,10 @@
+apps:
+  basic-app:
+    namespaces:
+    - team-a-dev
+    sourceRepos:
+      - https://github.com/devhub-showcase/basic-springboot-app
+    tenantGitops:
+      repo: https://github.com/devhub-showcase/tenants-cicd.git
+      path: dev-acm/team-a/basic-app
+    helmChartRepo: https://github.com/devhub-showcase/shared-helm-charts
