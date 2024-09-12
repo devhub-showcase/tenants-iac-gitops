@@ -20,7 +20,7 @@ spec:
         - name: CHART_REPO_URL
           value: https://github.com/devhub-showcase/shared-helm-charts.git
         - name: CHART_PATH
-          value: helm/charts/project-onboarding
+          value: charts/project-onboarding
         - name: VALUES_FOLDER
           value: clusters/dev-acm/team-a-application/project-onboarding-values/apps
         - name: VALUES_FILE
