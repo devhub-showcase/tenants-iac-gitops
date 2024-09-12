@@ -1,0 +1,54 @@
+{{- $releaseLabels := include "project-onboarding.labels" . -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-pipeline-local-user
+  namespace: {{ $values.namespace }}
+  labels:
+    {{- $releaseLabels | nindent 4 }}
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      containers:
+        - image: registry.redhat.io/openshift-gitops-1/argocd-rhel8:1.7
+          command:
+            - /bin/bash
+            - -c
+            - |
+              export HOME=/home/argocd
+
+              echo "Getting argocd admin credential..."
+              if kubectl get secret {{.Values.team}}-gitops-cluster >/dev/null;
+              then
+                # Retrieve password
+                PASSWORD=$(oc get secret {{.Values.team}}-gitops-cluster -o jsonpath="{.data.admin\.password}" | base64 -d)
+                if kubectl get secret {{.Values.team}}-gitops-cluster >/dev/null;
+                then
+                  DEV_HUB_PASSWORD=$(oc get secret developer-hub-user -o jsonpath="{.data.password}" | base64 -d)
+                  echo "Login to argocd server"
+                  argocd login --plaintext --username admin --password ${PASSWORD}  {{.Values.team}}-gitops-server
+                  argocd account list
+                  echo "Updating developer-hub user password"
+                  argocd account update-password \
+                    --account developer-hub \
+                    --current-password ${PASSWORD} \
+                    --new-password ${DEV_HUB_PASSWORD}
+                else
+                  echo "Could not retrieve developer-hub-user password"
+                  exit 1
+                fi
+              else
+                echo "Could not retrieve admin password"
+                exit 1
+              fi
+          imagePullPolicy: Always
+          name: create-pipeline-local-user
+      serviceAccount: {{.Values.team}}-gitops-argocd-application-controller
+      serviceAccountName: {{.Values.team}}-gitops-argocd-application-controller
+      dnsPolicy: ClusterFirst
+      restartPolicy: OnFailure
+      terminationGracePeriodSeconds: 30
