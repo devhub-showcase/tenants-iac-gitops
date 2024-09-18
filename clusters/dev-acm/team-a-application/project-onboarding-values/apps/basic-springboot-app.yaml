@@ -2,6 +2,8 @@ apps:
   basic-springboot-app:
     namespaces:
     - team-a-dev
+    - team-a-qa
+    - team-a-prod
     sourceRepos:
       - https://github.com/devhub-showcase/basic-springboot-app
     tenantGitops:
