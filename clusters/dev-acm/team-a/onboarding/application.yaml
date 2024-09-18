@@ -20,9 +20,9 @@ spec:
         - name: CHART_PATH
           value: helm/charts/project-onboarding
         - name: VALUES_FOLDER
-          value: clusters/dev-acm/team-a-application/project-onboarding-values/apps
+          value: clusters/dev-acm/team-a/onboarding/project-onboarding-chart-values/apps
         - name: VALUES_FILE
-          value: clusters/dev-acm/team-a-application/project-onboarding-values/values.yaml
+          value: clusters/dev-acm/team-a/onboarding/project-onboarding-chart-values/values.yaml
   syncPolicy:
     automated: {}
     syncOptions:
