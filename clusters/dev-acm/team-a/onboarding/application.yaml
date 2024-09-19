@@ -18,11 +18,11 @@ spec:
       name: helm-multivalues-plugin
       env:
         - name: CHART_PATH
-          value: helm/charts/project-onboarding
+          value: helm/charts/team-onboarding
         - name: VALUES_FOLDER
-          value: clusters/dev-acm/team-a/onboarding/project-onboarding-chart-values/apps
+          value: clusters/dev-acm/team-a/onboarding/team-onboarding/apps
         - name: VALUES_FILE
-          value: clusters/dev-acm/team-a/onboarding/project-onboarding-chart-values/values.yaml
+          value: clusters/dev-acm/team-a/onboarding/team-onboarding/values.yaml
   syncPolicy:
     automated: {}
     syncOptions:

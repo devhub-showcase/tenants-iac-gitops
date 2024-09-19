@@ -1,4 +1,4 @@
-{{- $releaseLabels := include "project-onboarding.labels" . -}}
+{{- $releaseLabels := include "team-onboarding.labels" . -}}
 {{- $values := .Values -}}
 {{- range $key, $apps := .Values.apps}}
 ---

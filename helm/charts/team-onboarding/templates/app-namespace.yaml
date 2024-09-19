@@ -1,4 +1,4 @@
-{{- $releaseLabels := include "project-onboarding.labels" . -}}
+{{- $releaseLabels := include "team-onboarding.labels" . -}}
 {{- $gitopsNamespace := .Values.namespace -}}
 {{- range $key, $apps := .Values.apps}}
 {{- range $namespace := $apps.namespaces }}

@@ -1,5 +1,5 @@
 apiVersion: v2
-name: project-onboarding
+name: team-onboarding
 description: A Helm chart for Onboarding Application in OpenShift using DevHub Templates
 
 # A chart can be either an 'application' or a 'library' chart.

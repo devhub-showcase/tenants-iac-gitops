@@ -14,7 +14,7 @@ metadata:
   name: {{.Values.team}}-gitops
   namespace: {{ .Values.namespace }}
   labels:
-    {{- include "project-onboarding.labels" . | nindent 4 }}
+    {{- include "team-onboarding.labels" . | nindent 4 }}
 spec:
   resourceTrackingMethod: annotation
   kustomizeBuildOptions: --enable-alpha-plugins --load-restrictor LoadRestrictionsNone --helm-command /usr/local/bin/helm

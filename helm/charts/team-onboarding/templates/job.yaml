@@ -1,4 +1,4 @@
-{{- $releaseLabels := include "project-onboarding.labels" . -}}
+{{- $releaseLabels := include "team-onboarding.labels" . -}}
 apiVersion: batch/v1
 kind: Job
 metadata:
