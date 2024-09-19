@@ -1,0 +1,12 @@
+apps:
+  springboot-app:
+    namespaces:
+    - team-dos-dev
+    - team-dos-qa
+    - team-dos-prod
+    sourceRepos:
+      - https://github.com/devhub-showcase/springboot-app
+    tenantGitops:
+      repo: https://github.com/devhub-showcase/tenants-cicd.git
+      path: dev-acm/team-dos/springboot-app
+    helmChartRepo: https://github.com/devhub-showcase/shared-helm-charts

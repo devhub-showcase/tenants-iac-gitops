@@ -1,0 +1,35 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: team-dos-onboarding-chart
+  namespace: openshift-gitops
+  labels:
+    type: application
+spec:
+  destination:
+    server: "https://kubernetes.default.svc"
+  project: default
+  source:
+    path: .
+    repoURL: "https://github.com/devhub-showcase/tenants-iac-gitops.git"
+    targetRevision: main
+    plugin:
+      name: helm-multivalues-plugin
+      env:
+        - name: CHART_PATH
+          value: helm/charts/team-onboarding
+        - name: VALUES_FOLDER
+          value: clusters/dev-acm/team-dos/onboarding/team-onboarding/apps
+        - name: VALUES_FILE
+          value: clusters/dev-acm/team-dos/onboarding/team-onboarding/values.yaml
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - SkipDryRunOnMissingResource=true
+      - Validate=false
+      - ApplyOutOfSyncOnly=true
+      - RespectIgnoreDifferences=true
+      - Prune=true
