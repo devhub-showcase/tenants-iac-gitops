@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: team-a-project-onboarding
+  name: team-a-cicd-onboarding
   namespace: openshift-gitops
   labels:
     type: application
