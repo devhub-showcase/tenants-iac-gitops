@@ -27,7 +27,9 @@ spec:
       repoURL: {{$apps.tenantGitops.repo}}
       targetRevision: main
   syncPolicy:
-    automated: {}
+    automated:
+      selfHeal: true
+      prune: true
     syncOptions:
       - SkipDryRunOnMissingResource=true
       - Validate=false
