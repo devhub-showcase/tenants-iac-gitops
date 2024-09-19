@@ -1,0 +1,13 @@
+---
+apiVersion: crossplane.vpogu.com/v1alpha1
+kind: StorageAzure
+metadata:
+  namespace: team-uno-dev
+  name: springboot-app-storage-account
+spec:
+  compositionRef:
+    name: storageazure-composition
+  parameters:
+    location: East US
+    resourceGroupName: rg-team-uno-dev-springboot-app
+    storageAccountName: accountteamunodevspringbootapp
