@@ -1,9 +1,0 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: samplens
-  labels:
-    cluster: dev-acm
-    team: team-a
-    argocd.argoproj.io/managed-by: openshift-gitops
