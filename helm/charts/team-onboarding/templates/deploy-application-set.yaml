@@ -9,7 +9,7 @@ metadata:
   namespace: {{ $values.namespace }}
   labels:
     {{- $releaseLabels | nindent 4 }}
-    {{ $values.team }}-gitops: {{$key}}
+    {{ $values.team }}-cicd: {{$key}}
 spec:
   generators:
     - git:
@@ -24,11 +24,11 @@ spec:
     metadata:
       name: {{ $key }}-{{`{{ .path.filename | splitList "-" | first }}` }}
       labels:
-        {{ $values.team }}-gitops: {{$key}}
+        {{ $values.team }}-cicd: {{$key}}
     spec:
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: '{{ trimSuffix "-gitops" $values.namespace }}-{{`{{ .path.filename | splitList "-" | first }}` }}'
+        namespace: '{{ trimSuffix "-cicd" $values.namespace }}-{{`{{ .path.filename | splitList "-" | first }}` }}'
       project: {{ $key }}
       sources:
         - helm:

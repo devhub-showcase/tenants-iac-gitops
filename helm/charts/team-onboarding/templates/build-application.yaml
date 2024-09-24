@@ -9,7 +9,7 @@ metadata:
   namespace: {{ $values.namespace }}
   labels:
     {{- $releaseLabels | nindent 4 }}
-    {{ $values.team }}-gitops: {{$key}}
+    {{ $values.team }}-cicd: {{$key}}
 spec:
   destination:
     server: "https://kubernetes.default.svc"

@@ -11,7 +11,7 @@
 kind: ArgoCD
 apiVersion: argoproj.io/v1beta1
 metadata:
-  name: {{.Values.team}}-gitops
+  name: {{.Values.team}}-cicd
   namespace: {{ .Values.namespace }}
   labels:
     {{- include "team-onboarding.labels" . | nindent 4 }}
@@ -34,7 +34,7 @@ spec:
       requests:
         cpu: 250m
         memory: 1Gi
-  applicationInstanceLabelKey: {{.Values.team}}-gitops
+  applicationInstanceLabelKey: {{.Values.team}}-cicd
   applicationSet:
     resources:
       limits:

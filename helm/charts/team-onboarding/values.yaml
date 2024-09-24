@@ -9,6 +9,6 @@ apps: []
 #     sourceRepos:
 #       - https://helm.github.io/examples
 #     tenantGitops:
-#       repo: https://github.com/idp-team/team-a-gitops.git
+#       repo: https://github.com/idp-team/team-a-cicd.git
 #       path: dev-acm
 #     helmChartRepo: https://github.com/idp-team/helm-charts

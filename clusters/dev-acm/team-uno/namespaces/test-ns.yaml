@@ -1,9 +1,0 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: test-ns
-  labels:
-    cluster: dev-acm
-    team: team-uno
-    argocd.argoproj.io/managed-by: openshift-gitops

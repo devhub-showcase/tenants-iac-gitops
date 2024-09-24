@@ -22,17 +22,17 @@ spec:
               export HOME=/home/argocd
 
               echo "Getting argocd admin credential..."
-              if kubectl get secret {{.Values.team}}-gitops-cluster >/dev/null;
+              if kubectl get secret {{.Values.team}}-cicd-cluster >/dev/null;
               then
                 # Retrieve password
-                PASSWORD=$(oc get secret {{.Values.team}}-gitops-cluster -o jsonpath="{.data.admin\.password}" | base64 -d)
-                if kubectl get secret {{.Values.team}}-gitops-cluster >/dev/null;
+                PASSWORD=$(oc get secret {{.Values.team}}-cicd-cluster -o jsonpath="{.data.admin\.password}" | base64 -d)
+                if kubectl get secret {{.Values.team}}-cicd-cluster >/dev/null;
                 then
                   if oc get secret developer-hub-user >/dev/null;
                   then
                     DEV_HUB_PASSWORD=$(oc get secret developer-hub-user -o jsonpath="{.data.password}" | base64 -d)
                     echo "Login to argocd server"
-                    argocd login --plaintext --username admin --password ${PASSWORD}  {{.Values.team}}-gitops-server
+                    argocd login --plaintext --username admin --password ${PASSWORD}  {{.Values.team}}-cicd-server
                     argocd account list
                     echo "Updating developer-hub user password"
                     argocd account update-password \
@@ -50,8 +50,8 @@ spec:
               fi
           imagePullPolicy: Always
           name: create-pipeline-local-user
-      serviceAccount: {{.Values.team}}-gitops-argocd-application-controller
-      serviceAccountName: {{.Values.team}}-gitops-argocd-application-controller
+      serviceAccount: {{.Values.team}}-cicd-argocd-application-controller
+      serviceAccountName: {{.Values.team}}-cicd-argocd-application-controller
       dnsPolicy: ClusterFirst
       restartPolicy: OnFailure
       terminationGracePeriodSeconds: 30
