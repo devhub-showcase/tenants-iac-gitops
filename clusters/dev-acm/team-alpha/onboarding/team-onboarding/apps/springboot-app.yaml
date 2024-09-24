@@ -1,0 +1,12 @@
+apps:
+  springboot-app:
+    namespaces:
+    - team-alpha-dev
+    - team-alpha-qa
+    - team-alpha-prod
+    sourceRepos:
+      - https://github.com/devhub-showcase/springboot-app
+    tenantGitops:
+      repo: https://github.com/devhub-showcase/tenants-cicd.git
+      path: dev-acm/team-alpha/springboot-app
+    helmChartRepo: https://github.com/devhub-showcase/shared-helm-charts
