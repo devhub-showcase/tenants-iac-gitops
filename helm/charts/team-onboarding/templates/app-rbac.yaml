@@ -1,0 +1,22 @@
+{{- $releaseLabels := include "team-onboarding.labels" . -}}
+{{- $gitopsNamespace := .Values.namespace -}}
+{{- range $key, $apps := .Values.apps}}
+{{- range $namespace := $apps.namespaces }}
+---
+kind: RoleBinding
+metadata:
+  labels:
+    {{- $releaseLabels | nindent 4 }}
+    argocd.argoproj.io/managed-by: {{$gitopsNamespace}}
+  name: {{ $namespace }}-pipeline-edit
+  namespace: {{ $namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+- kind: ServiceAccount
+  name: pipeline
+  namespace: {{$gitopsNamespace}}
+{{- end }}
+{{- end }}
