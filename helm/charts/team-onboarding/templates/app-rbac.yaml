@@ -3,6 +3,7 @@
 {{- range $key, $apps := .Values.apps}}
 {{- range $namespace := $apps.namespaces }}
 ---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   labels:
