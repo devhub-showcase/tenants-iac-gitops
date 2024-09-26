@@ -24,7 +24,7 @@ spec:
     metadata:
       name: {{ $key }}-{{`{{ .path.filename | splitList "-" | first }}` }}
       labels:
-        rht-gitops.com/{{ $values.team }}-cicd: {{$key}}
+        {{ $values.team }}-cicd: {{$key}}
     spec:
       destination:
         server: "https://kubernetes.default.svc"
