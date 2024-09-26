@@ -62,7 +62,7 @@ spec:
     policy: |
       g, system:cluster-admins, role:admin
       g, openshift-admins, role:admin
-      g, developer-hub, role:admin
+      g, developer-hub, role:readonly
     scopes: "[groups]"
   sso:
     dex:
