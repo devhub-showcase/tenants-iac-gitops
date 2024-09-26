@@ -9,11 +9,13 @@ metadata:
   namespace: {{ $values.namespace }}
   labels:
     {{- $releaseLabels | nindent 4 }}
+    {{ $values.team }}-cicd: {{$key}}
 spec:
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ $values.namespace }}
   project: {{ $key }}
+  revisionHistoryLimit: 5
   sources:
     - helm:
         releaseName: {{$key}}
