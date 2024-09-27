@@ -24,6 +24,9 @@ spec:
         - name: VALUES_FILE
           value: clusters/dev-acm/team-alpha/onboarding/team-onboarding/values.yaml
   syncPolicy:
+    managedNamespaceMetadata:
+      labels: 
+        argocd.argoproj.io/managed-by: openshift-gitops
     automated:
       selfHeal: true
       prune: true

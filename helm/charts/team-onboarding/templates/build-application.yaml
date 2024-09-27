@@ -28,6 +28,9 @@ spec:
       repoURL: {{$apps.tenantGitops.repo}}
       targetRevision: main
   syncPolicy:
+    managedNamespaceMetadata:
+      labels: 
+        argocd.argoproj.io/managed-by: {{ $values.team }}-cicd
     automated:
       selfHeal: true
       prune: true
