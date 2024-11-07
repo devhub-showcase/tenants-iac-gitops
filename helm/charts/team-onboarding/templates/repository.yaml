@@ -1,6 +1,26 @@
 {{- $releaseLabels := include "team-onboarding.labels" . -}}
 {{- $gitopsNamespace := .Values.namespace -}}
 {{- range $key, $apps := .Values.apps}}
+---
+apiVersion: "pipelinesascode.tekton.dev/v1alpha1"
+kind: Repository
+metadata:
+  name: {{ ( splitList "/" $apps.tenantGitops.repo | last | replace ".git" "") }}
+  namespace: {{ $gitopsNamespace }}
+  labels:
+    {{- $releaseLabels | nindent 4 }}
+spec:
+  url: {{ $apps.tenantGitops.repo }}
+---
+apiVersion: "pipelinesascode.tekton.dev/v1alpha1"
+kind: Repository
+metadata:
+  name: {{ ( splitList "/" $apps.helmChartRepo | last | replace ".git" "") }}
+  namespace: {{ $gitopsNamespace }}
+  labels:
+    {{- $releaseLabels | nindent 4 }}
+spec:
+  url: {{ $apps.helmChartRepo }}
 {{- range $repo := $apps.sourceRepos }}
 {{- $repoName := ( splitList "/" $repo | last | replace ".git" "")}}
 ---
@@ -15,7 +35,7 @@ spec:
   url: {{ $repo }}
   settings:
     github_app_token_scope_repos:
-      - {{$apps.tenantGitops.repo | replace "https://github.com/" "" | replace ".git" ""}}
-      - {{$apps.helmChartRepo | replace "https://github.com/" "" | replace ".git" "" }}
+      - {{ $apps.tenantGitops.repo | replace "https://github.com/" "" | replace ".git" ""}}
+      - {{ $apps.helmChartRepo | replace "https://github.com/" "" | replace ".git" "" }}
 {{- end }}
 {{- end }}
