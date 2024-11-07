@@ -15,7 +15,7 @@ spec:
   url: {{ $repo }}
   settings:
     github_app_token_scope_repos:
-      - {{$apps.tenantGitops.repo}}
-      - {{$apps.helmChartRepo}}
+      - {{$apps.tenantGitops.repo | replace "https://github.com/" "" | replace ".git" ""}}
+      - {{$apps.helmChartRepo | replace "https://github.com/" "" | replace ".git" "" }}
 {{- end }}
 {{- end }}
