@@ -15,7 +15,7 @@ spec:
 apiVersion: "pipelinesascode.tekton.dev/v1alpha1"
 kind: Repository
 metadata:
-  name: {{ ( splitList "/" $apps.helmChartRepo | last | replace ".git" "") }}
+  name: {{ ( splitList "/" $apps.tenantGitops.repo | last | replace ".git" "") }}
   namespace: {{ $gitopsNamespace }}
   labels:
     {{- $releaseLabels | nindent 4 }}
@@ -35,7 +35,7 @@ spec:
   url: {{ $repo }}
   settings:
     github_app_token_scope_repos:
-      - {{ $apps.tenantGitops.repo | replace "https://github.com/" "" | replace ".git" ""}}
-      - {{ $apps.helmChartRepo | replace "https://github.com/" "" | replace ".git" "" }}
+      - {{ ( splitList "/" $apps.tenantGitops.repo | last | replace ".git" "") }}
+      - {{ ( splitList "/" $apps.tenantGitops.repo | last | replace ".git" "") }}
 {{- end }}
 {{- end }}
