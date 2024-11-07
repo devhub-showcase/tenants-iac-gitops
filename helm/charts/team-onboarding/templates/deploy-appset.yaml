@@ -25,6 +25,16 @@ spec:
       name: {{ $key }}-{{`{{ .path.filename | splitList "-" | first }}` }}
       labels:
         {{ $values.team }}-cicd: {{$key}}
+      annotations:
+        argocd-image-updater.argoproj.io/image-list: main=quay.io/rhn_gps_vpogu/{{$key}}:test
+        argocd-image-updater.argoproj.io/main.update-strategy: newest-build
+        argocd-image-updater.argoproj.io/write-back-method: git:secret:openshift-gitops/git-creds
+        argocd-image-updater.argoproj.io/git-branch: main
+        argocd-image-updater.argoproj.io/git-repository: {{$apps.tenantGitops.repo}}
+        argocd-image-updater.argoproj.io/write-back-target: "helmvalues:../../{{`{{ .path.path }}/{{.path.filename}}`}}"
+        argocd-image-updater.argoproj.io/main.helm.image-tag: image.tag
+        argocd-image-updater.argoproj.io/main.helm.image-name: image.repository
+        argocd-image-updater.argoproj.io/force-update: "true"
     spec:
       destination:
         server: "https://kubernetes.default.svc"
