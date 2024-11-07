@@ -10,7 +10,7 @@ metadata:
   labels:
     {{- $releaseLabels | nindent 4 }}
 spec:
-  url: {{ $apps.tenantGitops.repo }}
+  url: {{ $apps.tenantGitops.repo | replace ".git" "" }}
 ---
 apiVersion: "pipelinesascode.tekton.dev/v1alpha1"
 kind: Repository
@@ -20,7 +20,7 @@ metadata:
   labels:
     {{- $releaseLabels | nindent 4 }}
 spec:
-  url: {{ $apps.helmChartRepo }}
+  url: {{ $apps.helmChartRepo | replace ".git" "" }}
 {{- range $repo := $apps.sourceRepos }}
 {{- $repoName := ( splitList "/" $repo | last | replace ".git" "")}}
 ---
