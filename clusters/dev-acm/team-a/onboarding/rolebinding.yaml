@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: "team-a-cicd-cluster-reader"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-reader
+subjects:
+  - kind: ServiceAccount
+    name: team-a-cicd-argocd-application-controller
+    namespace: team-a-cicd
+  - kind: ServiceAccount
+    name: team-a-cicd-argocd-server
+    namespace: team-a-cicd
