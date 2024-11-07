@@ -1,0 +1,21 @@
+{{- $releaseLabels := include "team-onboarding.labels" . -}}
+{{- $gitopsNamespace := .Values.namespace -}}
+{{- range $key, $apps := .Values.apps}}
+{{- range $repo := $apps.sourceRepos }}
+{{- $repoName := ( splitList "/" $repo | last | replace ".git" "")}}
+---
+apiVersion: "pipelinesascode.tekton.dev/v1alpha1"
+kind: Repository
+metadata:
+  name: {{ $repoName }}
+  namespace: {{ $gitopsNamespace }}
+  labels:
+    {{- $releaseLabels | nindent 4 }}
+spec:
+  url: {{ $repo }}
+  settings:
+    github_app_token_scope_repos:
+      - {{$apps.tenantGitops.repo}}
+      - {{$apps.helmChartRepo}}
+{{- end }}
+{{- end }}
